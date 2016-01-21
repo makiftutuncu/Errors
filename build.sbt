@@ -8,3 +8,9 @@ scalaVersion := "2.11.7"
 shellPrompt := {
   state: State => "[" + scala.Console.CYAN + name.value.toLowerCase + scala.Console.RESET + "] $ "
 }
+
+libraryDependencies ++= Seq(
+  "org.specs2" %% "specs2-core" % "3.7" % Test
+)
+
+scalacOptions in Test ++= Seq("-Yrangepos")
