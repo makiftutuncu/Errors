@@ -17,3 +17,14 @@ case class SimpleError(name: String) extends ErrorBase {
     */
   override def represent(): String = s"""{"name":"$name","when":$when}"""
 }
+
+/** A container object for some predefined [[com.mehmetakiftutuncu.errors.SimpleError]]s */
+object SimpleError {
+  def database       = SimpleError("database")
+  def invalidData    = SimpleError("invalidData")
+  def invalidRequest = SimpleError("invalidRequest")
+  def requestFailed  = SimpleError("requestFailed")
+  def timeout        = SimpleError("timeout")
+  def authorization  = SimpleError("authorization")
+  def authentication = SimpleError("authentication")
+}

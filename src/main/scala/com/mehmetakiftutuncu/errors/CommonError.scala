@@ -46,3 +46,14 @@ case class CommonError(name: String, reason: String = "", data: String = "") ext
     s"""{"name":"$name"$contentPrefix$content,"when":$when}"""
   }
 }
+
+/** A container object for some predefined [[com.mehmetakiftutuncu.errors.CommonError]]s */
+object CommonError {
+  def database       = CommonError("database")
+  def invalidData    = CommonError("invalidData")
+  def invalidRequest = CommonError("invalidRequest")
+  def requestFailed  = CommonError("requestFailed")
+  def timeout        = CommonError("timeout")
+  def authorization  = CommonError("authorization")
+  def authentication = CommonError("authentication")
+}

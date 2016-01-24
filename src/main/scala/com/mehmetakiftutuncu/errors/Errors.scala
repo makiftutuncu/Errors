@@ -21,7 +21,7 @@ case class Errors[R](errors: List[ErrorBase], representer: ErrorRepresenter[R]) 
     *
     * @return A copy of current errors with given error added
     */
-  def +(error: ErrorBase): Errors[_] = copy(errors :+ error)
+  def +(error: ErrorBase): Errors[R] = copy(errors :+ error)
 
   /**
     * Adds given errors to the current errors
@@ -30,7 +30,7 @@ case class Errors[R](errors: List[ErrorBase], representer: ErrorRepresenter[R]) 
     *
     * @return A copy of current errors with given errors added
     */
-  def addAll(otherErrors: ErrorBase*): Errors[_] = copy(errors ++ otherErrors)
+  def addAll(otherErrors: ErrorBase*): Errors[R] = copy(errors ++ otherErrors)
 
   /**
     * Adds errors in another [[com.mehmetakiftutuncu.errors.Errors]] to the current errors
@@ -39,7 +39,7 @@ case class Errors[R](errors: List[ErrorBase], representer: ErrorRepresenter[R]) 
     *
     * @return A copy of current errors with given errors added
     */
-  def ++(otherErrors: Errors[_]): Errors[_] = copy(errors ++ otherErrors.errors)
+  def ++(otherErrors: Errors[R]): Errors[R] = copy(errors ++ otherErrors.errors)
 
   /**
     * Removes given error from current errors if it exists
@@ -48,7 +48,7 @@ case class Errors[R](errors: List[ErrorBase], representer: ErrorRepresenter[R]) 
     *
     * @return A copy of current errors with given error removed
     */
-  def -(error: ErrorBase): Errors[_] = copy(errors.filter(_ != error))
+  def -(error: ErrorBase): Errors[R] = copy(errors.filter(_ != error))
 
   /**
     * Removes given errors from the current errors
@@ -57,7 +57,7 @@ case class Errors[R](errors: List[ErrorBase], representer: ErrorRepresenter[R]) 
     *
     * @return A copy of current errors with given errors removed
     */
-  def removeAll(otherErrors: ErrorBase*): Errors[_] = copy(errors diff otherErrors)
+  def removeAll(otherErrors: ErrorBase*): Errors[R] = copy(errors diff otherErrors)
 
   /**
     * Removes errors in another [[com.mehmetakiftutuncu.errors.Errors]] from the current errors
@@ -66,7 +66,7 @@ case class Errors[R](errors: List[ErrorBase], representer: ErrorRepresenter[R]) 
     *
     * @return A copy of current errors with given errors remove
     */
-  def --(otherErrors: Errors[_]): Errors[_] = copy(errors diff otherErrors.errors)
+  def --(otherErrors: Errors[R]): Errors[R] = copy(errors diff otherErrors.errors)
 
   /**
     * Checks if there is no error added
@@ -221,26 +221,4 @@ object Errors {
     * @return An empty [[com.mehmetakiftutuncu.errors.Errors]] with given representer
     */
   def empty[R](representer: ErrorRepresenter[R]): Errors[R] = apply(representer)
-
-  /** A container object for some predefined [[com.mehmetakiftutuncu.errors.SimpleError]]s */
-  object Simple {
-    def database       = SimpleError("database")
-    def invalidData    = SimpleError("invalidData")
-    def invalidRequest = SimpleError("invalidRequest")
-    def requestFailed  = SimpleError("requestFailed")
-    def timeout        = SimpleError("timeout")
-    def authorization  = SimpleError("authorization")
-    def authentication = SimpleError("authentication")
-  }
-
-  /** A container object for some predefined [[com.mehmetakiftutuncu.errors.CommonError]]s */
-  object Common {
-    def database       = CommonError("database")
-    def invalidData    = CommonError("invalidData")
-    def invalidRequest = CommonError("invalidRequest")
-    def requestFailed  = CommonError("requestFailed")
-    def timeout        = CommonError("timeout")
-    def authorization  = CommonError("authorization")
-    def authentication = CommonError("authentication")
-  }
 }
