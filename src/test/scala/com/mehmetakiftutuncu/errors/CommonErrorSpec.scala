@@ -1,4 +1,4 @@
-package com.mehmetakiftutuncu.errors.common
+package com.mehmetakiftutuncu.errors
 
 import org.specs2.mutable.Specification
 
@@ -63,6 +63,38 @@ class CommonErrorSpec extends Specification {
 
       before must not equalTo after
       after.data mustEqual "baz"
+    }
+  }
+
+  br
+
+  "Representing a CommonError" should {
+    "represent properly with just name" in {
+      val error    = CommonError(name = "foo")
+      val expected = s"""{"name":"foo","when":${error.when}}"""
+
+      error.represent() mustEqual expected
+    }
+
+    "represent properly with just name and reason" in {
+      val error    = CommonError(name = "foo", reason = "bar")
+      val expected = s"""{"name":"foo","reason":"bar","when":${error.when}}"""
+
+      error.represent() mustEqual expected
+    }
+
+    "represent properly with just name and data" in {
+      val error    = CommonError(name = "foo", data = "bar")
+      val expected = s"""{"name":"foo","data":"bar","when":${error.when}}"""
+
+      error.represent() mustEqual expected
+    }
+
+    "represent properly with all fields" in {
+      val error    = CommonError(name = "foo", reason = "bar", data = "baz")
+      val expected = s"""{"name":"foo","reason":"bar","data":"baz","when":${error.when}}"""
+
+      error.represent() mustEqual expected
     }
   }
 }

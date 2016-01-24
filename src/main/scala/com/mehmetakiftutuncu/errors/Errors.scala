@@ -1,7 +1,7 @@
 package com.mehmetakiftutuncu.errors
 
 import com.mehmetakiftutuncu.errors.base.ErrorBase
-import com.mehmetakiftutuncu.errors.representation.{JsonStringRepresenter, RepresenterBase}
+import com.mehmetakiftutuncu.errors.representation.{ErrorRepresenter, JsonStringErrorRepresenter}
 
 /**
   * An immutable error container to easily represent errors
@@ -11,9 +11,9 @@ import com.mehmetakiftutuncu.errors.representation.{JsonStringRepresenter, Repre
   *
   * @tparam R Type of the representer
   *
-  * @see [[com.mehmetakiftutuncu.errors.representation.RepresenterBase]]
+  * @see [[com.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
   */
-case class Errors[R](errors: List[ErrorBase], representer: RepresenterBase[R]) {
+case class Errors[R](errors: List[ErrorBase], representer: ErrorRepresenter[R]) {
   /**
     * Adds given error to current errors
     *
@@ -135,16 +135,16 @@ case class Errors[R](errors: List[ErrorBase], representer: RepresenterBase[R]) {
     *
     * @return Representation of all of added errors
     *
-    * @see [[com.mehmetakiftutuncu.errors.representation.RepresenterBase]]
+    * @see [[com.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
     */
-  def represent = representer.represent(errors.toList)
+  def represent = representer.represent(errors)
 
   /**
     * Represents all of added errors as [[String]] using current representer
     *
     * @return String representation of all of added errors
     *
-    * @see [[com.mehmetakiftutuncu.errors.representation.RepresenterBase]]
+    * @see [[com.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
     */
   override def toString: String = representer.asString(represent)
 }
@@ -164,7 +164,7 @@ object Errors {
     *
     * @see [[com.mehmetakiftutuncu.errors.Errors#empty]]
     */
-  def apply[R](representer: RepresenterBase[R]): Errors[R] = {
+  def apply[R](representer: ErrorRepresenter[R]): Errors[R] = {
     new Errors(List.empty[ErrorBase], representer)
   }
 
@@ -178,36 +178,36 @@ object Errors {
     *
     * @return An [[com.mehmetakiftutuncu.errors.Errors]] with given representer and with all given errors added
     */
-  def apply[R](representer: RepresenterBase[R], errors: ErrorBase*): Errors[R] = {
+  def apply[R](representer: ErrorRepresenter[R], errors: ErrorBase*): Errors[R] = {
     new Errors(List(errors:_*), representer)
   }
 
   /**
-    * Generates an empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringRepresenter]]
+    * Generates an empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     *
-    * @return An empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringRepresenter]]
+    * @return An empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     *
     * @see [[com.mehmetakiftutuncu.errors.Errors#empty()]]
     */
   def apply(): Errors[String] = {
-    new Errors(List.empty[ErrorBase], JsonStringRepresenter)
+    new Errors(List.empty[ErrorBase], JsonStringErrorRepresenter)
   }
 
   /**
-    * Generates an [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringRepresenter]] and with all given errors added
+    * Generates an [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]] and with all given errors added
     *
     * @param errors Errors to initially add
     *
-    * @return An [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringRepresenter]] and with all given errors added
+    * @return An [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]] and with all given errors added
     */
   def apply(errors: ErrorBase*): Errors[String] = {
-    new Errors(List(errors:_*), JsonStringRepresenter)
+    new Errors(List(errors: _*), JsonStringErrorRepresenter)
   }
 
   /**
-    * Generates an empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringRepresenter]]
+    * Generates an empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     *
-    * @return An empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringRepresenter]]
+    * @return An empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     */
   def empty: Errors[String] = apply()
 
@@ -220,5 +220,27 @@ object Errors {
     *
     * @return An empty [[com.mehmetakiftutuncu.errors.Errors]] with given representer
     */
-  def empty[R](representer: RepresenterBase[R]): Errors[R] = apply(representer)
+  def empty[R](representer: ErrorRepresenter[R]): Errors[R] = apply(representer)
+
+  /** A container object for some predefined [[com.mehmetakiftutuncu.errors.SimpleError]]s */
+  object Simple {
+    def database       = SimpleError("database")
+    def invalidData    = SimpleError("invalidData")
+    def invalidRequest = SimpleError("invalidRequest")
+    def requestFailed  = SimpleError("requestFailed")
+    def timeout        = SimpleError("timeout")
+    def authorization  = SimpleError("authorization")
+    def authentication = SimpleError("authentication")
+  }
+
+  /** A container object for some predefined [[com.mehmetakiftutuncu.errors.CommonError]]s */
+  object Common {
+    def database       = CommonError("database")
+    def invalidData    = CommonError("invalidData")
+    def invalidRequest = CommonError("invalidRequest")
+    def requestFailed  = CommonError("requestFailed")
+    def timeout        = CommonError("timeout")
+    def authorization  = CommonError("authorization")
+    def authentication = CommonError("authentication")
+  }
 }

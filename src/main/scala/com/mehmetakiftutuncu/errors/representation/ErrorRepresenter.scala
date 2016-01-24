@@ -9,7 +9,7 @@ import com.mehmetakiftutuncu.errors.base.ErrorBase
   *
   * @author Mehmet Akif Tütüncü
   */
-trait RepresenterBase[R] {
+trait ErrorRepresenter[R] {
   /**
     * Represents given error
     *
@@ -17,7 +17,7 @@ trait RepresenterBase[R] {
     *
     * @return Representation of given error
     */
-  def represent(error: ErrorBase): R = throw new NotImplementedError(s"Representation for $error is not implemented!")
+  def represent(error: ErrorBase): R
 
   /**
     * Represents all of given errors
