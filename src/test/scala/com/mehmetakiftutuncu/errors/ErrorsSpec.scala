@@ -1,7 +1,7 @@
 package com.mehmetakiftutuncu.errors
 
 import com.mehmetakiftutuncu.errors.base.ErrorBase
-import com.mehmetakiftutuncu.errors.representation.{ErrorRepresenter, JsonStringErrorRepresenter}
+import com.mehmetakiftutuncu.errors.representation.ErrorRepresenter
 import org.specs2.mutable.Specification
 
 /**
