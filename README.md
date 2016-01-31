@@ -15,7 +15,7 @@ Since Errors is immutable, any kind of update operation (i.e. any method returni
 You can easily create both empty and non-empty [```Errors```](src/main/scala/com/mehmetakiftutuncu/errors/Errors.scala) instances. Just use ```empty``` or ```apply``` methods.
 
 **Example**
-```
+```scala
 // Empty errors
 val errors1 = Errors.empty
 val errors2 = Errors()
@@ -30,7 +30,7 @@ val errors3 = Errors(CommonError.timeout, SimpleError.authorization)
 You can create error objects to add to or remove from or even perform checks on an ```Errors``` instance. There are 2 types of errors already defined; [```CommonError```](src/main/scala/com/mehmetakiftutuncu/errors/CommonError.scala) and [```SimpleError```](src/main/scala/com/mehmetakiftutuncu/errors/SimpleError.scala). However, you can use any type of errors as long as they extend from [```ErrorBase```](src/main/scala/com/mehmetakiftutuncu/errors/base/ErrorBase.scala).
 
 **Example**
-```
+```scala
 // You can provide all info.
 val error1 = CommonError(name = "invalidData", reason = "Value must be a positive integer.", data = "-5")
 
@@ -51,7 +51,7 @@ val error5 = SimpleError.timeout
 You can add a single error, multiple errors or the errors in an existing Errors instance to an Errors instance.
 
 **Example**
-```
+```scala
 val errors1 = Errors.empty
 val errors2 = Errors(SimpleError.authorization)
 
@@ -68,7 +68,7 @@ val errors5 = errors3 ++ Errors(SimpleError.authorization)
 You can remove a single error, multiple errors or the errors in an existing Errors instance from an Errors instance.
 
 **Example**
-```
+```scala
 val errors1 = Errors(CommonError.timeout, SimpleError.authorization)
 
 val errors2 = errors1 - CommonError.timeout
@@ -85,7 +85,7 @@ val errors4 = errors1 -- Errors(SimpleError.authorization)
 You can perform several checks on an ```Errors``` instance.
 
 **Example**
-```
+```scala
 val errors1 = Errors(CommonError.timeout, SimpleError.authorization)
 val errors2 = Errors.empty
 
@@ -121,7 +121,7 @@ errors1.exists {
 As default implementation, ```Errors``` will use [```JsonStringErrorRepresenter```](src/main/scala/com/mehmetakiftutuncu/errors/representation/JsonStringErrorRepresenter.scala) and give a Json formatted string representation of all errors as an array. You may also provide your own error representer extending [```ErrorRepresenter```](src/main/scala/com/mehmetakiftutuncu/errors/representation/ErrorRepresenter.scala) so you can represent your errors in any way you want.
 
 **Example**
-```
+```scala
 val error1 = CommonError(name = "foo")
 val error2 = CommonError(name = "foo", reason = "bar")
 val error3 = CommonError(name = "foo", data = "bar")
