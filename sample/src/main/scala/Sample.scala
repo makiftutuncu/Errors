@@ -4,6 +4,8 @@ import scala.util.Random
 
 /**
   * A sample object to demonstrate the usage of Errors library
+  *
+  * @author Mehmet Akif Tütüncü
   */
 object Sample {
   def main(args: Array[String]) {

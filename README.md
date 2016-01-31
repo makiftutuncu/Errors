@@ -149,6 +149,10 @@ errors.represent(customBooleanRepresenter)       // true
 
 To see ```Errors``` in action, you can check [```Sample```](sample/src/main/scala/Sample.scala) out in sample module.
 
+Contributing
+--------------
+I'd appreciate if you comment, file an issue, send pull requests. Please do contribute.
+
 License
 --------------
 The MIT License (MIT), Copyright (c) 2016 Mehmet Akif Tütüncü
