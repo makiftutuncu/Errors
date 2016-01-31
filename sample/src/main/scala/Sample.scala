@@ -7,7 +7,7 @@ import scala.util.Random
   */
 object Sample {
   def main(args: Array[String]) {
-    val finalErrors: Errors[String] = (1 to 5).foldLeft(Errors.empty) {
+    val finalErrors: Errors = (1 to 5).foldLeft(Errors.empty) {
       case (errors, i) =>
         errors ++ isDigit(Random.nextInt(15))
     }
@@ -30,7 +30,7 @@ object Sample {
     }
   }
 
-  def isDigit(number: Int): Errors[String] = {
+  def isDigit(number: Int): Errors = {
     if (number >= 0 && number < 10) {
       Errors.empty
     } else {

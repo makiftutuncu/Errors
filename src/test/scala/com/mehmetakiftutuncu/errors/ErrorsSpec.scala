@@ -8,6 +8,12 @@ import org.specs2.mutable.Specification
   * @author Mehmet Akif Tütüncü
   */
 class ErrorsSpec extends Specification {
+  val customRepresenter = new ErrorRepresenter[String] {
+    override def represent(error: ErrorBase): String = "foo"
+    override def represent(errors: List[ErrorBase]): String = "bar"
+    override def asString(representation: String): String = "baz"
+  }
+
   "Adding an error" should {
     "add a CommonError to empty Errors properly" in {
       val error    = CommonError("foo")
@@ -370,8 +376,23 @@ class ErrorsSpec extends Specification {
   br
 
   "Representing" should {
+    "represent empty Errors properly with default representer" in {
+      Errors.empty.represent() mustEqual "[]"
+    }
+
+    "represent non-empty Errors properly with default representer" in {
+      val error1   = CommonError("foo")
+      val error2   = CommonError("foo", "bar")
+      val error3   = CommonError("foo", "bar", "baz")
+      val error4   = SimpleError("boo")
+      val errors   = Errors(error1, error2, error3, error4)
+      val expected = s"""[{"name":"foo","when":${error1.when}},{"name":"foo","reason":"bar","when":${error2.when}},{"name":"foo","reason":"bar","data":"baz","when":${error3.when}},{"name":"boo","when":${error4.when}}]"""
+
+      errors.represent() mustEqual expected
+    }
+
     "represent empty Errors properly with given representer" in {
-      Errors.empty(JsonStringErrorRepresenter).represent mustEqual "[]"
+      Errors.empty.represent(customRepresenter) mustEqual "bar"
     }
 
     "represent non-empty Errors properly with given representer" in {
@@ -379,69 +400,39 @@ class ErrorsSpec extends Specification {
       val error2   = CommonError("foo", "bar")
       val error3   = CommonError("foo", "bar", "baz")
       val error4   = SimpleError("boo")
-      val errors   = Errors(JsonStringErrorRepresenter, error1, error2, error3, error4)
-      val expected = s"""[{"name":"foo","when":${error1.when}},{"name":"foo","reason":"bar","when":${error2.when}},{"name":"foo","reason":"bar","data":"baz","when":${error3.when}},{"name":"boo","when":${error4.when}}]"""
+      val errors   = Errors(error1, error2, error3, error4)
 
-      errors.represent mustEqual expected
+      errors.represent(customRepresenter) mustEqual "bar"
     }
   }
 
   br
 
   "Creating new Errors" should {
-    val representer = new ErrorRepresenter[String] {
-      override def represent(error: ErrorBase): String = "foo"
-      override def represent(errors: List[ErrorBase]): String = "bar"
-      override def asString(representation: String): String = "baz"
-    }
-
-    "create empty Errors with given representer properly" in {
-      val errors1 = Errors(representer)
-      errors1.isEmpty must beTrue
-      errors1.representer mustEqual representer
-      errors1.represent mustEqual "bar"
-      errors1.toString  mustEqual "baz"
-
-      val errors2 = Errors.empty(representer)
-      errors2.isEmpty must beTrue
-      errors2.representer mustEqual representer
-      errors2.represent mustEqual "bar"
-      errors2.toString  mustEqual "baz"
-    }
-
-    "create empty Errors with JsonStringErrorRepresenter properly when representer is not given" in {
+    "create empty Errors properly" in {
       val errors1 = Errors()
-      errors1.isEmpty must beTrue
-      errors1.representer mustEqual JsonStringErrorRepresenter
-      errors1.represent   mustEqual "[]"
-      errors1.toString    mustEqual "[]"
+      errors1.isEmpty                      must beTrue
+      errors1.represent()                  mustEqual "[]"
+      errors1.represent(customRepresenter) mustEqual "bar"
+      errors1.toString                     mustEqual "[]"
 
       val errors2 = Errors.empty
-      errors2.isEmpty must beTrue
-      errors2.representer mustEqual JsonStringErrorRepresenter
-      errors2.represent   mustEqual "[]"
-      errors2.toString    mustEqual "[]"
+      errors2.isEmpty                      must beTrue
+      errors2.represent()                  mustEqual "[]"
+      errors2.represent(customRepresenter) mustEqual "bar"
+      errors2.toString                     mustEqual "[]"
     }
 
-    "create non-empty Errors with given representer properly" in {
-      val errors = Errors(representer, SimpleError("foo"), CommonError("bar", "baz"))
-
-      errors.nonEmpty must beTrue
-      errors.representer mustEqual representer
-      errors.represent   mustEqual "bar"
-      errors.toString    mustEqual "baz"
-    }
-
-    "create non-empty Errors with JsonStringErrorRepresenter properly when representer is not given" in {
+    "create non-empty Errors properly" in {
       val error1 = SimpleError("foo")
       val error2 = CommonError("bar", "baz")
       val errors   = Errors(error1, error2)
       val expected = s"""[{"name":"foo","when":${error1.when}},{"name":"bar","reason":"baz","when":${error2.when}}]"""
 
-      errors.nonEmpty must beTrue
-      errors.representer mustEqual JsonStringErrorRepresenter
-      errors.represent   mustEqual expected
-      errors.toString    mustEqual expected
+      errors.nonEmpty                     must beTrue
+      errors.represent()                  mustEqual expected
+      errors.represent(customRepresenter) mustEqual "bar"
+      errors.toString                     mustEqual expected
     }
   }
 }
