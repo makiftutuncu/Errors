@@ -48,7 +48,7 @@ val error5 = SimpleError.timeout
 ****
 
 ###Adding Errors
-You can add a single error, multiple errors or the errors in an existing Errors instance to an Errors instance.
+You can add a single error, multiple errors or the errors in an existing ```Errors``` instance to an ```Errors``` instance.
 
 **Example**
 ```scala
@@ -65,7 +65,7 @@ val errors5 = errors3 ++ Errors(SimpleError.authorization)
 ****
 
 ###Removing Errors
-You can remove a single error, multiple errors or the errors in an existing Errors instance from an Errors instance.
+You can remove a single error, multiple errors or the errors in an existing ```Errors``` instance from an ```Errors``` instance.
 
 **Example**
 ```scala
@@ -151,7 +151,7 @@ To see ```Errors``` in action, you can check [```Sample```](sample/src/main/scal
 
 Contributing
 --------------
-I'd appreciate if you comment, file an issue, send pull requests. Please do contribute.
+I'd appreciate if you comment, file an issue, send pull requests. Please feel free to and do contribute.
 
 License
 --------------
