@@ -29,11 +29,11 @@ trait ErrorRepresenter[R] {
   def represent(errors: List[ErrorBase]): R
 
   /**
-    * Coverts given representation to a [[String]]
+    * Coverts given representation to a [[scala.Predef.String]]
     *
     * @param representation Representation to convert
     *
-    * @return [[String]] representation of given representation
+    * @return [[scala.Predef.String]] representation of given representation
     */
   def asString(representation: R): String
 }

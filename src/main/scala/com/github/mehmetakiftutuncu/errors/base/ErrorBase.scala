@@ -11,7 +11,7 @@ trait ErrorBase {
   /**
     * Timestamp of the time when this error occurred.
     *
-    * @see [[System#currentTimeMillis]]
+    * @see [[java.lang.System#currentTimeMillis]]
     */
   val when: Long = System.currentTimeMillis()
 

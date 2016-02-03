@@ -150,7 +150,7 @@ case class Errors(errors: List[ErrorBase]) {
   def represent[R](representer: ErrorRepresenter[R]) = representer.represent(errors)
 
   /**
-    * Represents all of added errors as [[String]] using [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
+    * Represents all of added errors as [[scala.Predef.String]] using [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     *
     * @return String representation of all of added errors
     *
