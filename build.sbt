@@ -16,8 +16,3 @@ lazy val errorsProject = Project("errors", file(".")).settings(
 
   scalacOptions in Test ++= Seq("-Yrangepos")
 )
-
-lazy val sampleProject = Project("sample", file("sample")).settings(
-  version := "1.0",
-  scalaVersion := "2.11.7"
-).dependsOn(errorsProject)

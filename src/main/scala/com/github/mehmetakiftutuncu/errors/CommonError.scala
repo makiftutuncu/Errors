@@ -1,6 +1,6 @@
-package com.mehmetakiftutuncu.errors
+package com.github.mehmetakiftutuncu.errors
 
-import com.mehmetakiftutuncu.errors.base.ErrorBase
+import com.github.mehmetakiftutuncu.errors.base.ErrorBase
 
 /**
   * A basic error implementation for most common cases
@@ -47,7 +47,7 @@ case class CommonError(name: String, reason: String = "", data: String = "") ext
   }
 }
 
-/** A container object for some predefined [[com.mehmetakiftutuncu.errors.CommonError]]s */
+/** A container object for some predefined [[com.github.mehmetakiftutuncu.errors.CommonError]]s */
 object CommonError {
   def database       = CommonError("database")
   def invalidData    = CommonError("invalidData")

@@ -1,14 +1,14 @@
-package com.mehmetakiftutuncu.errors
+package com.github.mehmetakiftutuncu.errors
 
-import com.mehmetakiftutuncu.errors.base.ErrorBase
-import com.mehmetakiftutuncu.errors.representation.{ErrorRepresenter, JsonStringErrorRepresenter}
+import com.github.mehmetakiftutuncu.errors.base.ErrorBase
+import com.github.mehmetakiftutuncu.errors.representation.{ErrorRepresenter, JsonStringErrorRepresenter}
 
 /**
   * An immutable error container to easily represent errors
   *
-  * @param errors A [[scala.collection.immutable.List]] of [[com.mehmetakiftutuncu.errors.base.ErrorBase]]s
+  * @param errors A [[scala.collection.immutable.List]] of [[com.github.mehmetakiftutuncu.errors.base.ErrorBase]]s
   *
-  * @see [[com.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
+  * @see [[com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
   */
 case class Errors(errors: List[ErrorBase]) {
   /**
@@ -30,7 +30,7 @@ case class Errors(errors: List[ErrorBase]) {
   def addAll(otherErrors: ErrorBase*): Errors = copy(errors ++ otherErrors)
 
   /**
-    * Adds errors in another [[com.mehmetakiftutuncu.errors.Errors]] to the current errors
+    * Adds errors in another [[com.github.mehmetakiftutuncu.errors.Errors]] to the current errors
     *
     * @param otherErrors Errors to add
     *
@@ -57,7 +57,7 @@ case class Errors(errors: List[ErrorBase]) {
   def removeAll(otherErrors: ErrorBase*): Errors = copy(errors diff otherErrors)
 
   /**
-    * Removes errors in another [[com.mehmetakiftutuncu.errors.Errors]] from the current errors
+    * Removes errors in another [[com.github.mehmetakiftutuncu.errors.Errors]] from the current errors
     *
     * @param otherErrors Errors to remove
     *
@@ -70,7 +70,7 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return true if there is no error added
     *
-    * @see [[com.mehmetakiftutuncu.errors.Errors#nonEmpty]]
+    * @see [[com.github.mehmetakiftutuncu.errors.Errors#nonEmpty]]
     */
   def isEmpty: Boolean = errors.isEmpty
 
@@ -79,8 +79,8 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return true if there any error added
     *
-    * @see [[com.mehmetakiftutuncu.errors.Errors#isEmpty]]
-    * @see [[com.mehmetakiftutuncu.errors.Errors#hasErrors]]
+    * @see [[com.github.mehmetakiftutuncu.errors.Errors#isEmpty]]
+    * @see [[com.github.mehmetakiftutuncu.errors.Errors#hasErrors]]
     */
   def nonEmpty: Boolean = errors.nonEmpty
 
@@ -89,7 +89,7 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return true if there any error added
     *
-    * @see [[com.mehmetakiftutuncu.errors.Errors#nonEmpty]]
+    * @see [[com.github.mehmetakiftutuncu.errors.Errors#nonEmpty]]
     */
   def hasErrors: Boolean = nonEmpty
 
@@ -98,7 +98,7 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return Number of errors added
     *
-    * @see [[com.mehmetakiftutuncu.errors.Errors#numberOfErrors]]
+    * @see [[com.github.mehmetakiftutuncu.errors.Errors#numberOfErrors]]
     */
   def size: Int = errors.size
 
@@ -128,11 +128,11 @@ case class Errors(errors: List[ErrorBase]) {
   def exists(check: (ErrorBase) => Boolean): Boolean = errors.exists(check)
 
   /**
-    * Represents all of added errors using [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
+    * Represents all of added errors using [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     *
     * @return Representation of all of added errors
     *
-    * @see [[com.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
+    * @see [[com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
     */
   def represent() = JsonStringErrorRepresenter.represent(errors)
 
@@ -145,50 +145,50 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return Representation of all of added errors using given representer
     *
-    * @see [[com.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
+    * @see [[com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
     */
   def represent[R](representer: ErrorRepresenter[R]) = representer.represent(errors)
 
   /**
-    * Represents all of added errors as [[String]] using [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
+    * Represents all of added errors as [[String]] using [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     *
     * @return String representation of all of added errors
     *
-    * @see [[com.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
+    * @see [[com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
     */
   override def toString: String = represent()
 }
 
 /**
-  * Companion object to [[com.mehmetakiftutuncu.errors.Errors]]
+  * Companion object to [[com.github.mehmetakiftutuncu.errors.Errors]]
   */
 object Errors {
   /**
-    * Generates an empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
+    * Generates an empty [[com.github.mehmetakiftutuncu.errors.Errors]] with [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     *
-    * @return An empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
+    * @return An empty [[com.github.mehmetakiftutuncu.errors.Errors]] with [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     *
-    * @see [[com.mehmetakiftutuncu.errors.Errors#empty()]]
+    * @see [[com.github.mehmetakiftutuncu.errors.Errors#empty()]]
     */
   def apply(): Errors = {
     new Errors(List.empty[ErrorBase])
   }
 
   /**
-    * Generates an [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]] and with all given errors added
+    * Generates an [[com.github.mehmetakiftutuncu.errors.Errors]] with [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]] and with all given errors added
     *
     * @param errors Errors to initially add
     *
-    * @return An [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]] and with all given errors added
+    * @return An [[com.github.mehmetakiftutuncu.errors.Errors]] with [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]] and with all given errors added
     */
   def apply(errors: ErrorBase*): Errors = {
     new Errors(List(errors: _*))
   }
 
   /**
-    * Generates an empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
+    * Generates an empty [[com.github.mehmetakiftutuncu.errors.Errors]] with [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     *
-    * @return An empty [[com.mehmetakiftutuncu.errors.Errors]] with [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
+    * @return An empty [[com.github.mehmetakiftutuncu.errors.Errors]] with [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     */
   def empty: Errors = apply()
 }

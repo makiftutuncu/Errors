@@ -1,6 +1,6 @@
-package com.mehmetakiftutuncu.errors.base
+package com.github.mehmetakiftutuncu.errors.base
 
-import com.mehmetakiftutuncu.errors.representation.ErrorRepresenter
+import com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter
 
 /**
   * A base trait for errors
@@ -20,14 +20,14 @@ trait ErrorBase {
     *
     * @return Representation of this error
     *
-    * @see [[com.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
+    * @see [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     */
   def represent(): String
 
   /**
     * Represents this error using given representer
     *
-    * @param representer A [[com.mehmetakiftutuncu.errors.representation.ErrorRepresenter]] to represent this error
+    * @param representer A [[com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter]] to represent this error
     *
     * @tparam R Type of the error representation
     *

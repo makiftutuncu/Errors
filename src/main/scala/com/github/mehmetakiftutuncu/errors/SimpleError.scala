@@ -1,6 +1,6 @@
-package com.mehmetakiftutuncu.errors
+package com.github.mehmetakiftutuncu.errors
 
-import com.mehmetakiftutuncu.errors.base.ErrorBase
+import com.github.mehmetakiftutuncu.errors.base.ErrorBase
 
 /**
   * A simple error implementation for really simple and trivial cases
@@ -18,7 +18,7 @@ case class SimpleError(name: String) extends ErrorBase {
   override def represent(): String = s"""{"name":"$name","when":$when}"""
 }
 
-/** A container object for some predefined [[com.mehmetakiftutuncu.errors.SimpleError]]s */
+/** A container object for some predefined [[com.github.mehmetakiftutuncu.errors.SimpleError]]s */
 object SimpleError {
   def database       = SimpleError("database")
   def invalidData    = SimpleError("invalidData")

@@ -1,7 +1,7 @@
-package com.mehmetakiftutuncu.errors
+package com.github.mehmetakiftutuncu.errors
 
-import com.mehmetakiftutuncu.errors.base.ErrorBase
-import com.mehmetakiftutuncu.errors.representation.ErrorRepresenter
+import com.github.mehmetakiftutuncu.errors.base.ErrorBase
+import com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter
 import org.specs2.mutable.Specification
 
 /**

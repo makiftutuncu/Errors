@@ -1,4 +1,4 @@
-package com.mehmetakiftutuncu.errors
+package com.github.mehmetakiftutuncu.errors
 
 import org.specs2.mutable.Specification
 

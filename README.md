@@ -9,10 +9,10 @@ To-Do
 
 Examples
 --------------
-Since Errors is immutable, any kind of update operation (i.e. any method returning [```Errors```](src/main/scala/com/mehmetakiftutuncu/errors/Errors.scala) or any error extending [```ErrorBase```](src/main/scala/com/mehmetakiftutuncu/errors/base/ErrorBase.scala)) return a new copy with new data.
+Since Errors is immutable, any kind of update operation (i.e. any method returning [```Errors```](src/main/scala/com/github/mehmetakiftutuncu/errors/Errors.scala) or any error extending [```ErrorBase```](src/main/scala/com/github/mehmetakiftutuncu/errors/base/ErrorBase.scala)) return a new copy with new data.
 
 ###Creating an Errors Instance
-You can easily create both empty and non-empty [```Errors```](src/main/scala/com/mehmetakiftutuncu/errors/Errors.scala) instances. Just use ```empty``` or ```apply``` methods.
+You can easily create both empty and non-empty [```Errors```](src/main/scala/com/github/mehmetakiftutuncu/errors/Errors.scala) instances. Just use ```empty``` or ```apply``` methods.
 
 **Example**
 ```scala
@@ -27,7 +27,7 @@ val errors3 = Errors(CommonError.timeout, SimpleError.authorization)
 ****
 
 ###Creating Error Objects
-You can create error objects to add to or remove from or even perform checks on an ```Errors``` instance. There are 2 types of errors already defined; [```CommonError```](src/main/scala/com/mehmetakiftutuncu/errors/CommonError.scala) and [```SimpleError```](src/main/scala/com/mehmetakiftutuncu/errors/SimpleError.scala). However, you can use any type of errors as long as they extend from [```ErrorBase```](src/main/scala/com/mehmetakiftutuncu/errors/base/ErrorBase.scala).
+You can create error objects to add to or remove from or even perform checks on an ```Errors``` instance. There are 2 types of errors already defined; [```CommonError```](src/main/scala/com/github/mehmetakiftutuncu/errors/CommonError.scala) and [```SimpleError```](src/main/scala/com/github/mehmetakiftutuncu/errors/SimpleError.scala). However, you can use any type of errors as long as they extend from [```ErrorBase```](src/main/scala/com/github/mehmetakiftutuncu/errors/base/ErrorBase.scala).
 
 **Example**
 ```scala
@@ -118,7 +118,7 @@ errors1.exists {
 ****
 
 ###Representing Errors
-As default implementation, ```Errors``` will use [```JsonStringErrorRepresenter```](src/main/scala/com/mehmetakiftutuncu/errors/representation/JsonStringErrorRepresenter.scala) and give a Json formatted string representation of all errors as an array. You may also provide your own error representer extending [```ErrorRepresenter```](src/main/scala/com/mehmetakiftutuncu/errors/representation/ErrorRepresenter.scala) so you can represent your errors in any way you want.
+As default implementation, ```Errors``` will use [```JsonStringErrorRepresenter```](src/main/scala/com/github/mehmetakiftutuncu/errors/representation/JsonStringErrorRepresenter.scala) and give a Json formatted string representation of all errors as an array. You may also provide your own error representer extending [```ErrorRepresenter```](src/main/scala/com/github/mehmetakiftutuncu/errors/representation/ErrorRepresenter.scala) so you can represent your errors in any way you want.
 
 **Example**
 ```scala
@@ -144,10 +144,6 @@ val customBooleanRepresenter = new ErrorRepresenter[Boolean] {
 Errors.empty.represent(customBooleanRepresenter) // false
 errors.represent(customBooleanRepresenter)       // true
 ```
-
-****
-
-To see ```Errors``` in action, you can check [```Sample```](sample/src/main/scala/Sample.scala) out in sample module.
 
 Contributing
 --------------

@@ -1,6 +1,6 @@
-package com.mehmetakiftutuncu.errors.representation
+package com.github.mehmetakiftutuncu.errors.representation
 
-import com.mehmetakiftutuncu.errors.base.ErrorBase
+import com.github.mehmetakiftutuncu.errors.base.ErrorBase
 
 /**
   * A base trait for representing errors
