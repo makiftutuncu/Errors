@@ -10,7 +10,7 @@ Add following to your ```build.sbt``` if you are using **SBT**
 libraryDependencies += "com.github.mehmetakiftutuncu" %% "errors" % "1.0"
 ```
 
-Or add following to your ```pom.xml``` if you are using ***Maven**
+Or add following to your ```pom.xml``` if you are using **Maven**
 ```xml
 <dependency>
 	<groupId>com.github.mehmetakiftutuncu</groupId>
