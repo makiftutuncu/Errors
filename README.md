@@ -162,6 +162,8 @@ Errors.empty.represent(customBooleanRepresenter) // false
 errors.represent(customBooleanRepresenter)       // true
 ```
 
+You can see a real error representer example in [```JsonErrorRepresenter```](samples/PlayFrameworkExample/app/controllers/JsonErrorRepresenter.scala).
+
 Contributing
 --------------
 I'd appreciate if you comment, file an issue, send pull requests. Please feel free to and do contribute.
