@@ -5,12 +5,12 @@ Errors is an easy-to-use library written in Scala for providing immutable, light
 
 How to Include in Your Project
 --------------
-Add following to your build.sbt if you are using SBT
+Add following to your ```build.sbt``` if you are using **SBT**
 ```sbt
-libraryDependencies += "com.github.mehmetakiftutuncu" % "errors_2.11" % "1.0"
+libraryDependencies += "com.github.mehmetakiftutuncu" %% "errors" % "1.0"
 ```
 
-Or add following to your pom.xml if you are using Maven
+Or add following to your ```pom.xml``` if you are using ***Maven**
 ```xml
 <dependency>
 	<groupId>com.github.mehmetakiftutuncu</groupId>
@@ -19,7 +19,7 @@ Or add following to your pom.xml if you are using Maven
 </dependency>
 ```
 
-Or add following to your build.gradle if you are using Gradle
+Or add following to your ```build.gradle``` if you are using **Gradle**
 ```gradle
 compile 'com.github.mehmetakiftutuncu:errors_2.11:1.0'
 ```
