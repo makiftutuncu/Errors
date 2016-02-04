@@ -3,9 +3,26 @@ Errors
 
 Errors is an easy-to-use library written in Scala for providing immutable, lightweight, extensible way to represent errors in your project.
 
-To-Do
+How to Include in Your Project
 --------------
-* Add this project to a Maven repository so it can easily be integrated into other projects as a library.
+Add following to your build.sbt if you are using SBT
+```sbt
+libraryDependencies += "com.github.mehmetakiftutuncu" % "errors_2.11" % "1.0"
+```
+
+Or add following to your pom.xml if you are using Maven
+```xml
+<dependency>
+	<groupId>com.github.mehmetakiftutuncu</groupId>
+	<artifactId>errors_2.11</artifactId>
+	<version>1.0</version>
+</dependency>
+```
+
+Or add following to your build.gradle if you are using Gradle
+```gradle
+compile 'com.github.mehmetakiftutuncu:errors_2.11:1.0'
+```
 
 Examples
 --------------
