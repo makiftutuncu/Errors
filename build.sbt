@@ -2,7 +2,7 @@ import sbt.Keys._
 
 name         := "errors"
 organization := "com.github.mehmetakiftutuncu"
-version      := "1.0"
+version      := "1.1"
 description  := "Errors is an easy-to-use library written in Scala for providing immutable, lightweight, extensible way to represent errors in your project."
 homepage     := Option(url("https://github.com/mehmetakiftutuncu/Errors"))
 startYear    := Option(2016)
@@ -10,7 +10,7 @@ licenses     := Seq("MIT" -> url("https://opensource.org/licenses/MIT"))
 scmInfo      := Option(ScmInfo(url("https://github.com/mehmetakiftutuncu/Errors"), "https://github.com/mehmetakiftutuncu/Errors.git"))
 developers   := List(Developer("makiftutuncu", "Mehmet Akif Tütüncü", "m.akif.tutuncu@gmail.com", url("https://makiftutuncu.wordpress.com")))
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 
 // Update shell prompt of this module to get rid of ugly ">"
 shellPrompt := {
@@ -18,7 +18,7 @@ shellPrompt := {
 }
 
 libraryDependencies ++= Seq(
-  "org.specs2" %% "specs2-core" % "3.7" % Test
+  "org.specs2" %% "specs2-core" % "3.8.4" % Test
 )
 
 scalacOptions in Test ++= Seq("-Yrangepos")
