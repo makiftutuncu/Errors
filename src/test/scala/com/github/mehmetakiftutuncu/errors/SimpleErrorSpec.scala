@@ -8,7 +8,7 @@ import org.specs2.mutable.Specification
 class SimpleErrorSpec extends Specification {
   "A SimpleError" should {
     "be instantiated properly" in {
-      val error = SimpleError(name = "foo")
+      val error: SimpleError = SimpleError(name = "foo")
 
       error.name mustEqual "foo"
     }
@@ -18,10 +18,12 @@ class SimpleErrorSpec extends Specification {
 
   "Representing a SimpleError" should {
     "represent properly" in {
-      val error    = SimpleError(name = "foo")
-      val expected = s"""{"name":"foo","when":${error.when}}"""
+      val error: SimpleError       = SimpleError(name = "\"foo\"")
+      val expected: String         = s"""{"name":"\\"foo\\""}"""
+      val expectedWithWhen: String = s"""{"name":"\\"foo\\"","when":${error.when}}"""
 
-      error.represent() mustEqual expected
+      error.represent(includeWhen = false) mustEqual expected
+      error.represent(includeWhen = true)  mustEqual expectedWithWhen
     }
   }
 }

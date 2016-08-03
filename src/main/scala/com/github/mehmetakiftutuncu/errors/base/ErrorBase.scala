@@ -18,20 +18,23 @@ trait ErrorBase {
   /**
     * Represents this error as Json formatted String
     *
+    * @param includeWhen If set to true, when value of the error will be included in the representation
+    *
     * @return Representation of this error
     *
     * @see [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     */
-  def represent(): String
+  def represent(includeWhen: Boolean): String
 
   /**
     * Represents this error using given representer
     *
     * @param representer A [[com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter]] to represent this error
+    * @param includeWhen If set to true, when value of the error will be included in the representation
     *
     * @tparam R Type of the error representation
     *
     * @return Representation of this error
     */
-  def represent[R](representer: ErrorRepresenter[R]): R = representer.represent(this)
+  def represent[R](representer: ErrorRepresenter[R], includeWhen: Boolean): R = representer.represent(this, includeWhen)
 }

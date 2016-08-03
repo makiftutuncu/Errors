@@ -13,20 +13,22 @@ trait ErrorRepresenter[R] {
   /**
     * Represents given error
     *
-    * @param error Error to represent
+    * @param error       Error to represent
+    * @param includeWhen If set to true, when value of the error will be included in the representation
     *
     * @return Representation of given error
     */
-  def represent(error: ErrorBase): R
+  def represent(error: ErrorBase, includeWhen: Boolean): R
 
   /**
     * Represents all of given errors
     *
-    * @param errors Errors to represent
+    * @param errors      Errors to represent
+    * @param includeWhen If set to true, when value of the error will be included in the representation
     *
     * @return Representation of given errors
     */
-  def represent(errors: List[ErrorBase]): R
+  def represent(errors: List[ErrorBase], includeWhen: Boolean): R
 
   /**
     * Coverts given representation to a [[scala.Predef.String]]

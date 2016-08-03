@@ -19,7 +19,9 @@ case class CommonError(name: String, reason: String = "", data: String = "") ext
     *
     * @return A copy of this error with given reason
     */
-  def reason(reason: String): CommonError = copy(reason = reason)
+  def reason(reason: String): CommonError = {
+    copy(reason = reason)
+  }
 
   /**
     * Sets data to this error
@@ -28,32 +30,38 @@ case class CommonError(name: String, reason: String = "", data: String = "") ext
     *
     * @return A copy of this error with given data
     */
-  def data(data: String): CommonError = copy(data = data)
+  def data(data: String): CommonError = {
+    copy(data = data)
+  }
 
   /**
     * Represents this error as Json formatted String
     *
+    * @param includeWhen If set to true, when value of the error will be included in the representation
+    *
     * @return Representation of this error
     */
-  override def represent(): String = {
-    val reasonString = if (reason.isEmpty) "" else s""""reason":"$reason""""
-    val dataString   = if (data.isEmpty)   "" else s""""data":"$data""""
+  override def represent(includeWhen: Boolean): String = {
+    val nameRepresentation: String   = s""""name":"${name.replaceAll("\"", "\\\\\"")}""""
+    val reasonRepresentation: String = if (reason.isEmpty) "" else s""""reason":"${reason.replaceAll("\"", "\\\\\"")}""""
+    val dataRepresentation: String   = if (data.isEmpty)   "" else s""""data":"${data.replaceAll("\"", "\\\\\"")}""""
+    val whenRepresentation: String   = if (!includeWhen)   "" else s""","when":$when"""
 
-    val items         = List(reasonString, dataString).filter(_.nonEmpty)
-    val contentPrefix = if (items.isEmpty) "" else ","
-    val content       = items.mkString(",")
+    val items: List[String]           = List(reasonRepresentation, dataRepresentation).filter(_.nonEmpty)
+    val contentRepresentation: String = if (items.isEmpty) "" else items.mkString(",", ",", "")
 
-    s"""{"name":"$name"$contentPrefix$content,"when":$when}"""
+    s"""{$nameRepresentation$contentRepresentation$whenRepresentation}"""
   }
 }
 
 /** A container object for some predefined [[com.github.mehmetakiftutuncu.errors.CommonError]]s */
 object CommonError {
-  def database       = CommonError("database")
-  def invalidData    = CommonError("invalidData")
-  def invalidRequest = CommonError("invalidRequest")
-  def requestFailed  = CommonError("requestFailed")
-  def timeout        = CommonError("timeout")
-  def authorization  = CommonError("authorization")
-  def authentication = CommonError("authentication")
+  def database: CommonError       = CommonError("database")
+  def notFound: CommonError       = CommonError("notFound")
+  def invalidData: CommonError    = CommonError("invalidData")
+  def invalidRequest: CommonError = CommonError("invalidRequest")
+  def requestFailed: CommonError  = CommonError("requestFailed")
+  def timeout: CommonError        = CommonError("timeout")
+  def authorization: CommonError  = CommonError("authorization")
+  def authentication: CommonError = CommonError("authentication")
 }

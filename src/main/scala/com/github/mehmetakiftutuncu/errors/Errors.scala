@@ -9,6 +9,8 @@ import com.github.mehmetakiftutuncu.errors.representation.{ErrorRepresenter, Jso
   * @param errors A [[scala.collection.immutable.List]] of [[com.github.mehmetakiftutuncu.errors.base.ErrorBase]]s
   *
   * @see [[com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
+  *
+  * @author Mehmet Akif Tütüncü
   */
 case class Errors(errors: List[ErrorBase]) {
   /**
@@ -18,7 +20,9 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return A copy of current errors with given error added
     */
-  def +(error: ErrorBase): Errors = copy(errors :+ error)
+  def +(error: ErrorBase): Errors = {
+    copy(errors :+ error)
+  }
 
   /**
     * Adds given errors to the current errors
@@ -27,7 +31,9 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return A copy of current errors with given errors added
     */
-  def addAll(otherErrors: ErrorBase*): Errors = copy(errors ++ otherErrors)
+  def addAll(otherErrors: ErrorBase*): Errors = {
+    copy(errors ++ otherErrors)
+  }
 
   /**
     * Adds errors in another [[com.github.mehmetakiftutuncu.errors.Errors]] to the current errors
@@ -36,7 +42,9 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return A copy of current errors with given errors added
     */
-  def ++(otherErrors: Errors): Errors = copy(errors ++ otherErrors.errors)
+  def ++(otherErrors: Errors): Errors = {
+    copy(errors ++ otherErrors.errors)
+  }
 
   /**
     * Removes given error from current errors if it exists
@@ -45,7 +53,9 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return A copy of current errors with given error removed
     */
-  def -(error: ErrorBase): Errors = copy(errors.filter(_ != error))
+  def -(error: ErrorBase): Errors = {
+    copy(errors.filter(_ != error))
+  }
 
   /**
     * Removes given errors from the current errors
@@ -54,7 +64,9 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return A copy of current errors with given errors removed
     */
-  def removeAll(otherErrors: ErrorBase*): Errors = copy(errors diff otherErrors)
+  def removeAll(otherErrors: ErrorBase*): Errors = {
+    copy(errors diff otherErrors)
+  }
 
   /**
     * Removes errors in another [[com.github.mehmetakiftutuncu.errors.Errors]] from the current errors
@@ -63,7 +75,9 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return A copy of current errors with given errors remove
     */
-  def --(otherErrors: Errors): Errors = copy(errors diff otherErrors.errors)
+  def --(otherErrors: Errors): Errors = {
+    copy(errors diff otherErrors.errors)
+  }
 
   /**
     * Checks if there is no error added
@@ -72,7 +86,9 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @see [[com.github.mehmetakiftutuncu.errors.Errors#nonEmpty]]
     */
-  def isEmpty: Boolean = errors.isEmpty
+  def isEmpty: Boolean = {
+    errors.isEmpty
+  }
 
   /**
     * Checks if there is any error added
@@ -82,7 +98,9 @@ case class Errors(errors: List[ErrorBase]) {
     * @see [[com.github.mehmetakiftutuncu.errors.Errors#isEmpty]]
     * @see [[com.github.mehmetakiftutuncu.errors.Errors#hasErrors]]
     */
-  def nonEmpty: Boolean = errors.nonEmpty
+  def nonEmpty: Boolean = {
+    errors.nonEmpty
+  }
 
   /**
     * Checks if there is any error added
@@ -91,7 +109,9 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @see [[com.github.mehmetakiftutuncu.errors.Errors#nonEmpty]]
     */
-  def hasErrors: Boolean = nonEmpty
+  def hasErrors: Boolean = {
+    nonEmpty
+  }
 
   /**
     * Returns number of errors added
@@ -100,14 +120,18 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @see [[com.github.mehmetakiftutuncu.errors.Errors#numberOfErrors]]
     */
-  def size: Int = errors.size
+  def size: Int = {
+    errors.size
+  }
 
   /**
     * Returns number of errors added
     *
     * @return Number of errors added
     */
-  def numberOfErrors: Int = size
+  def numberOfErrors: Int = {
+    size
+  }
 
   /**
     * Checks whether given error exists in current errors
@@ -116,7 +140,9 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return true if given error exists in current errors, false otherwise
     */
-  def contains(error: ErrorBase): Boolean = errors.contains(error)
+  def contains(error: ErrorBase): Boolean = {
+    errors.contains(error)
+  }
 
   /**
     * Checks whether an error that satisfies given check exists in current errors
@@ -125,21 +151,28 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @return true if an error that satisfies given check exists in current errors
     */
-  def exists(check: (ErrorBase) => Boolean): Boolean = errors.exists(check)
+  def exists(check: (ErrorBase) => Boolean): Boolean = {
+    errors.exists(check)
+  }
 
   /**
     * Represents all of added errors using [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
+    *
+    * @param includeWhen If set to true, when value of the error will be included in the representation
     *
     * @return Representation of all of added errors
     *
     * @see [[com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
     */
-  def represent() = JsonStringErrorRepresenter.represent(errors)
+  def represent(includeWhen: Boolean) = {
+    JsonStringErrorRepresenter.represent(errors, includeWhen)
+  }
 
   /**
     * Represents all of added errors using given representer
     *
     * @param representer Representer to use when representing errors
+    * @param includeWhen If set to true, when value of the error will be included in the representation
     *
     * @tparam R Type of the representer
     *
@@ -147,7 +180,9 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @see [[com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
     */
-  def represent[R](representer: ErrorRepresenter[R]) = representer.represent(errors)
+  def represent[R](representer: ErrorRepresenter[R], includeWhen: Boolean) = {
+    representer.represent(errors, includeWhen)
+  }
 
   /**
     * Represents all of added errors as [[scala.Predef.String]] using [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
@@ -156,12 +191,12 @@ case class Errors(errors: List[ErrorBase]) {
     *
     * @see [[com.github.mehmetakiftutuncu.errors.representation.ErrorRepresenter]]
     */
-  override def toString: String = represent()
+  override def toString: String = {
+    represent(includeWhen = false)
+  }
 }
 
-/**
-  * Companion object to [[com.github.mehmetakiftutuncu.errors.Errors]]
-  */
+/** Companion object to [[com.github.mehmetakiftutuncu.errors.Errors]] */
 object Errors {
   /**
     * Generates an empty [[com.github.mehmetakiftutuncu.errors.Errors]] with [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
@@ -190,5 +225,7 @@ object Errors {
     *
     * @return An empty [[com.github.mehmetakiftutuncu.errors.Errors]] with [[com.github.mehmetakiftutuncu.errors.representation.JsonStringErrorRepresenter]]
     */
-  def empty: Errors = apply()
+  def empty: Errors = {
+    apply()
+  }
 }
