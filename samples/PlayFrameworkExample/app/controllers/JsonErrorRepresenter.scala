@@ -9,10 +9,10 @@ import play.api.libs.json.{JsNumber, Json, JsValue}
   *
   * This representer represents errors using Play Framework's Json APIs.
   *
-  * Created by akif on 04/02/16.
+  * @author Mehmet Akif Tütüncü
   */
 object JsonErrorRepresenter extends ErrorRepresenter[JsValue] {
-  override def represent(error: ErrorBase): JsValue = {
+  override def represent(error: ErrorBase, includeWhen: Boolean): JsValue = {
     val json = error match {
       case SimpleError(name)               => Json.obj("name" -> name)
       case CommonError(name, "", "")       => Json.obj("name" -> name)
@@ -21,10 +21,14 @@ object JsonErrorRepresenter extends ErrorRepresenter[JsValue] {
       case CommonError(name, reason, data) => Json.obj("name" -> name, "reason" -> reason, "data" -> data)
     }
 
-    json + ("when" -> JsNumber(error.when))
+    if (includeWhen) {
+      json + ("when" -> JsNumber(error.when))
+    } else {
+      json
+    }
   }
 
   override def asString(representation: JsValue): String = representation.toString()
 
-  override def represent(errors: List[ErrorBase]): JsValue = Json.toJson(errors.map(represent))
+  override def represent(errors: List[ErrorBase], includeWhen: Boolean): JsValue = Json.toJson(errors.map(represent(_, includeWhen)))
 }
