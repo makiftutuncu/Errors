@@ -7,28 +7,28 @@ How to Include in Your Project
 --------------
 Add following to your ```build.sbt``` if you are using **SBT**
 ```sbt
-libraryDependencies += "com.github.mehmetakiftutuncu" %% "errors" % "1.1"
+libraryDependencies += "com.github.mehmetakiftutuncu" %% "errors" % "1.2"
 ```
 
-Or add following to your ```pom.xml``` if you are using **Maven**
+Or add following to your ```pom.xml``` if you are using **Maven** (use **errors_2.11** for **Scala 2.11**)
 ```xml
 <dependency>
 	<groupId>com.github.mehmetakiftutuncu</groupId>
-	<artifactId>errors_2.11</artifactId>
-	<version>1.1</version>
+	<artifactId>errors_2.12</artifactId>
+	<version>1.2</version>
 </dependency>
 ```
 
-Or add following to your ```build.gradle``` if you are using **Gradle**
+Or add following to your ```build.gradle``` if you are using **Gradle** (use **errors_2.11** for **Scala 2.11**)
 ```gradle
-compile 'com.github.mehmetakiftutuncu:errors_2.11:1.1'
+compile 'com.github.mehmetakiftutuncu:errors_2.12:1.2'
 ```
 
 Examples
 --------------
 Since Errors is immutable, any kind of update operation (i.e. any method returning [```Errors```](src/main/scala/com/github/mehmetakiftutuncu/errors/Errors.scala) or any error extending [```ErrorBase```](src/main/scala/com/github/mehmetakiftutuncu/errors/base/ErrorBase.scala)) return a new copy with new data.
 
-###Creating an Errors Instance
+### Creating an Errors Instance
 You can easily create both empty and non-empty [```Errors```](src/main/scala/com/github/mehmetakiftutuncu/errors/Errors.scala) instances. Just use ```empty``` or ```apply``` methods.
 
 **Example**
@@ -43,7 +43,7 @@ val errors3 = Errors(CommonError.timeout, SimpleError.authorization)
 
 ****
 
-###Creating Error Objects
+### Creating Error Objects
 You can create error objects to add to or remove from or even perform checks on an ```Errors``` instance. There are 2 types of errors already defined; [```CommonError```](src/main/scala/com/github/mehmetakiftutuncu/errors/CommonError.scala) and [```SimpleError```](src/main/scala/com/github/mehmetakiftutuncu/errors/SimpleError.scala). However, you can use any type of errors as long as they extend from [```ErrorBase```](src/main/scala/com/github/mehmetakiftutuncu/errors/base/ErrorBase.scala).
 
 **Example**
@@ -64,7 +64,7 @@ val error5 = SimpleError.timeout
 
 ****
 
-###Adding Errors
+### Adding Errors
 You can add a single error, multiple errors or the errors in an existing ```Errors``` instance to an ```Errors``` instance.
 
 **Example**
@@ -81,7 +81,7 @@ val errors5 = errors3 ++ Errors(SimpleError.authorization)
 
 ****
 
-###Removing Errors
+### Removing Errors
 You can remove a single error, multiple errors or the errors in an existing ```Errors``` instance from an ```Errors``` instance.
 
 **Example**
@@ -98,7 +98,7 @@ val errors4 = errors1 -- Errors(SimpleError.authorization)
 
 ****
 
-###Checking Errors Instance for Errors
+### Checking Errors Instance for Errors
 You can perform several checks on an ```Errors``` instance.
 
 **Example**
@@ -134,7 +134,7 @@ errors1.exists {
 
 ****
 
-###Using Maybe
+### Using Maybe
 There is a type alias for ```Either[Errors, V]``` defined as [```Maybe```](src/main/scala/com/github/mehmetakiftutuncu/errors/package.scala). It can be useful for error handling while accessing a value.  
 
 **Example**
@@ -176,7 +176,7 @@ result2.value // Returns 2
 
 ****
 
-###Representing Errors
+### Representing Errors
 As default implementation, ```Errors``` will use [```JsonStringErrorRepresenter```](src/main/scala/com/github/mehmetakiftutuncu/errors/representation/JsonStringErrorRepresenter.scala) and give a Json formatted string representation of all errors as an array. You may also provide your own error representer extending [```ErrorRepresenter```](src/main/scala/com/github/mehmetakiftutuncu/errors/representation/ErrorRepresenter.scala) so you can represent your errors in any way you want.
 
 **Example**
@@ -213,6 +213,10 @@ You can see a real error representer example in [```JsonErrorRepresenter```](sam
 Contributing
 --------------
 I'd appreciate if you comment, file an issue, send pull requests. Please feel free to and do contribute.
+
+### Contributors
+
+* [**@forthy**](https://github.com/forthy) - Cross compilation for Scala 2.11 and 2.12
 
 License
 --------------

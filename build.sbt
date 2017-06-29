@@ -12,7 +12,7 @@ developers   := List(Developer("makiftutuncu", "Mehmet Akif Tütüncü", "m.akif
 
 scalaVersion := "2.12.2"
 
-crossScalaVersions := Seq("2.11.8", "2.12.2")
+crossScalaVersions := Seq("2.11.11", "2.12.2")
 
 // Update shell prompt of this module to get rid of ugly ">"
 shellPrompt := {
@@ -29,13 +29,14 @@ publishMavenStyle := true
 
 exportJars := true
 
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
+useGpg := true
+
+publishTo := Some(
   if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
+    Opts.resolver.sonatypeSnapshots
   else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
+    Opts.resolver.sonatypeStaging
+)
 
 publishArtifact in Test := false
 
